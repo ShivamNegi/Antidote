@@ -3,7 +3,7 @@
         "sellerName": "Test Company",
         "sellerEmail": "seller@testcompany.com",
         "sellerCompanyId": "123456-7",
-        "selletVATNumber": "FI1234567",
+        "sellerVATNumber": "FI1234567",
         "sellerAddress": {
             "streetAddress": "Chicken Burrito Road 34",
             "zipCode": "23123",
