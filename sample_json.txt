@@ -1,0 +1,34 @@
+{
+    "sellerInformation": {
+        "sellerName": "Test Company",
+        "sellerEmail": "seller@testcompany.com",
+        "sellerCompanyId": "123456-7",
+        "selletVATNumber": "FI1234567",
+        "sellerAddress": {
+            "streetAddress": "Chicken Burrito Road 34",
+            "zipCode": "23123",
+            "city": "Tampere",
+            "country": "Finland"
+        }
+    },
+    "products": [{
+        "productName": "Awesome Chicken Burrito ",
+        "productId": "1231245",
+        "productEANCode": "3234234",
+        "productQuantity": 1,
+        "productUnitPriceExVAT": "10",
+        "productVATRate": "24",
+        "productVATAmount": "2.4"
+    }],
+    "receiptDate": "2017-06-27",
+    "receiptTimestamp": 1498768794,
+    "receiptNumber": 23532,
+    "totalPriceIncVAT": "12.4",
+    "totalPriceExVAT": "10",
+    "totalVATAmount": "2.4",
+    "currencyISOCode": "EUR",
+    "receiptFile": {
+        "fileType": "pdf",
+        "fileBase64": "<base64 encodede pdf file>"
+    }
+}
