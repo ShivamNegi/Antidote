@@ -226,7 +226,7 @@ function generateMap(apiPath, containerId) {
 
             return new google.maps.Map(mapContainer, {
                 center: initialRegion,
-                scrollwheel: true,
+                scrollwheel: false,
                 zoom: 12,
                 maxZoom: 13,
                 minZoom: 12,
@@ -289,7 +289,7 @@ function generateMap(apiPath, containerId) {
         var heatmap = new google.maps.visualization.HeatmapLayer({
             data: coord,
             map: map,
-            radius: 60,
+            radius: 40,
             // maxIntensity: 100
             maxIntensity: 30
         });

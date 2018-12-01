@@ -17,10 +17,16 @@ def main():
 
 @app.route('/api/v1/<event>')
 def event_handler(event):
-	if event == 'small':
+	if event == 'Malaria':
 		with open('events/sample.json', 'r') as container:
 			data = container.read()
-	else:
+	elif event == 'TB':
+		with open('events/sample2.json', 'r') as container:
+			data = container.read()
+	elif event == 'Jaundice':
+		with open('events/sample2.json', 'r') as container:
+			data = container.read()
+	elif event == 'Diarrhoea':
 		with open('events/sample2.json', 'r') as container:
 			data = container.read()
 

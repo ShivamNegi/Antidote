@@ -12,12 +12,12 @@
 
     </head>
 
-    <body onload="UpdateMap('small')" style="background-color:#F2F2F2;">
+    <body onload="UpdateMap('Malaria')" style="background-color: #f0ebf4">
         <!-- <p>Hopefully something is working.</p> -->
 <!-- <div class="container"> -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg fixed-top bg-light">
     <div class="continer"></div>
-    <a class="navbar-brand" href="#">Antidote</a>
+  <a class="navbar-brand" href="#" style="margin-left: 80px"><h3>Antidote</h3></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
     </button>
@@ -25,18 +25,21 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
         </li>
-        <!-- <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li> -->
+        <li>
+          <a class="nav-link" href="#">About<span class="sr-only">(current)</span></a>
+        </li>
+        
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Diseases
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" onclick="UpdateMap('small')">Malaria</a>
-            <a class="dropdown-item" onclick="UpdateMap('large')">TB</a>
+            <a class="dropdown-item" onclick="UpdateMap('Malaria')">Malaria</a>
+            <a class="dropdown-item" onclick="UpdateMap('TB')">TB</a>
+            <a class="dropdown-item" onclick="UpdateMap('Jaundice')">Jaundice</a>
+            <a class="dropdown-item" onclick="UpdateMap('Diarrhoea')">Diarrhoea</a>
             <!-- <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="#">Something else here</a> -->
           </div>
@@ -54,19 +57,23 @@
   </nav>      
 <!-- </div> -->
 
-  <div class="container" id="mapContainer"></div>
+  <div class="container" id="mapContainer" style="margin-top: 80px"></div>
+  <h5 class="text-center" id="Heatmap_name" style="margin-top: 20px;color:#3e95cd"></h5>
   <div class="container">
-    <div class="row">
-       <div class="col-sm-4"><canvas id="myChart" width="40" height="40"></canvas></div>
-       <div class="col-sm-4"><canvas id="line-chart" width="40" height="40"></canvas></div>
-       <div class="col-sm-4"><canvas id="line-chart1" width="40" height="40"></canvas></div>        
-    </div>      
+    <div class="row" style="margin-top:60px">
+       <div class="col-sm-6"><canvas id="myChart" width="40" height="40"></canvas></div>
+       <div class="col-sm-6"><canvas id="line-chart" width="40" height="40"></canvas></div>       
+    </div>
+    <div class="row" style="margin-top:60px">
+       <div class="col-sm-6"><canvas id="line-chart1" width="40" height="40"></canvas></div>        
+       <div class="col-sm-6"><canvas id="line-chart1" width="40" height="40"></canvas></div>        
+    </div>
   </div>
 
 
 
     <!-- Footer -->
-    <div style="background:#563d7c;color:white">
+    <div style="background:#563d7c;color:white;margin-top:60px">
     <div class="container">
     <footer class="page-footer font-small blue pt-4">
     <div class="container-fluid text-center text-md-left">
@@ -136,8 +143,12 @@
                         false, // showLeads
                         true // showHeatmap
                         )
-            }
 
+                var node = document.createTextNode("Heatmap for " + value);
+                var ele = document.getElementById("Heatmap_name");
+
+                ele.innerHTML = "Heatmap for " + value;
+            }
         </script>
 
 
@@ -146,7 +157,7 @@
         var myChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ["Malaria", "Diarrhoea", "Jaundice", "Diabetes", "TB", "Arthritis"],
+                labels: ["Malaria", "TB", "Jaundice", "Diarrhoea"],
                 datasets: [{
                     label: '# of Diseases',
                     data: [12, 19, 3, 5, 2, 3],
@@ -155,16 +166,12 @@
                         'rgba(54, 162, 235, 0.2)',
                         'rgba(255, 206, 86, 0.2)',
                         'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)'
                     ],
                     borderColor: [
                         'rgba(255,99,132,1)',
                         'rgba(54, 162, 235, 1)',
                         'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
+                        'rgba(75, 192, 192, 1)'
                     ],
                     borderWidth: 4
                 }]
