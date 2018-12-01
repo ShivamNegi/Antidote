@@ -3,43 +3,268 @@
 
     <head>
         <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script type = "text/javascript" src = "https://d3js.org/d3.v4.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+        <title>Antidote</title>
+
     </head>
 
-    <body>
+    <body onload="UpdateMap('small')" style="background-color:#F2F2F2;">
         <!-- <p>Hopefully something is working.</p> -->
-        <script type="text/javascript">
-            function jsFunction(value)
-            {
-                alert(value);
-            }            
-        </script>
+<!-- <div class="container"> -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="continer"></div>
+    <a class="navbar-brand" href="#">Antidote</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
 
-        <div align="center">
-            <select name="Type of Disease" onchange="UpdateMap(this.value)">
-                <option value="small">Small</option>
-                <option value="large">Large</option>                
-            </select>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li> -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Diseases
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" onclick="UpdateMap('small')">Malaria</a>
+            <a class="dropdown-item" onclick="UpdateMap('large')">TB</a>
+            <!-- <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Something else here</a> -->
+          </div>
+        </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link disabled" href="#">Disabled</a>
+        </li> -->
+      </ul>
+      <!-- <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form> -->
+    </div>
+    </div>
+  </nav>      
+<!-- </div> -->
+
+  <div class="container" id="mapContainer"></div>
+  <div class="container">
+    <div class="row">
+       <div class="col-sm-4"><canvas id="myChart" width="40" height="40"></canvas></div>
+       <div class="col-sm-4"><canvas id="line-chart" width="40" height="40"></canvas></div>
+       <div class="col-sm-4"><canvas id="line-chart1" width="40" height="40"></canvas></div>        
+    </div>      
+  </div>
+
+
+
+    <!-- Footer -->
+    <div style="background:#563d7c;color:white">
+    <div class="container">
+    <footer class="page-footer font-small blue pt-4">
+    <div class="container-fluid text-center text-md-left">
+      <div class="row">
+        <div class="col-md-6 mt-md-0 mt-3">
+          <h4 class="text-uppercase">Antidote</h4>
+          <h6>Track disease before it reaches you.</h6>
         </div>
+        <hr class="clearfix w-100 d-md-none pb-3">
+        <div class="col-md-3 mb-md-0 mb-3">
+            <!-- <h5 class="text-uppercase">Links</h5> -->
+            <!-- <ul class="list-unstyled">
+              <li>
+                <a href="#!">Link 1</a>
+              </li>
+              <li>
+                <a href="#!">Link 2</a>
+              </li>
+              <li>
+                <a href="#!">Link 3</a>
+              </li>
+              <li>
+                <a href="#!">Link 4</a>
+              </li>
+            </ul> -->
+          </div>
+          <div class="col-md-3 mb-md-0 mb-3">
+            <h5 class="text-uppercase">Links</h5>
+            <ul class="list-unstyled">
+              <li>
+                <a href="https://www.github.com">Github</a>
+              </li>
+              <li>
+                <a href="https://www.facebook.com">Facebook</a>
+              </li>
+              <li>
+                <a href="https://www.instagram.com">Instagram</a>
+              </li>
+            </ul>
+          </div>
+      </div>
+    </div>
+    </div>
+    <!-- Footer Links -->
 
-        <div id="mapContainer"></div>
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">© 2018 Ultrahack Espoo      
+    </div>
+    </div>
+    <!-- Copyright -->
 
+  </footer>
+
+  <!-- Footer -->
+
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuj10RU8Pl26mGSwt0ZVI9x2Hm4M2lZcc&libraries=visualization"></script>
-        <script src="{{ url_for('static', filename='js/heatmap_es5.js') }}"></script>        
+        <script src="{{ url_for('static', filename='js/heatmap_es5.js') }}"></script>
         <script>
             function UpdateMap(value)
             {
                 generateMap('api/v1/' + value,
-                        'mapContainer', 
+                        'mapContainer',
                         {lat: 60.18, lng: 24.82},
                         false, // isPolitical
-                        true, // showEvents
-                        true, // showLeads
+                        false, // showEvents
+                        false, // showLeads
                         true // showHeatmap
                         )
-            } 
-            
+            }
+
         </script>
+
+
+        <script>
+        var ctx = document.getElementById("myChart");
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ["Malaria", "Diarrhoea", "Jaundice", "Diabetes", "TB", "Arthritis"],
+                datasets: [{
+                    label: '# of Diseases',
+                    data: [12, 19, 3, 5, 2, 3],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 4
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true
+                        }
+                    }]
+                }
+            }
+        });
+        </script>
+
+        <script>
+        new Chart(document.getElementById("line-chart"), {
+        type: 'line',
+        data: {
+          labels: [1500,1600,1700,1750,1800,1850,1900,1950,1999,2050],
+          datasets: [{ 
+              data: [86,114,106,106,107,111,133,221,783,2478],
+              label: "Helsinki",
+              borderColor: "#3e95cd",
+              fill: false
+            }, { 
+              data: [282,350,411,502,635,809,947,1402,3700,5267],
+              label: "Espoo",
+              borderColor: "#8e5ea2",
+              fill: false
+            }/*, { 
+              data: [168,170,178,190,203,276,408,547,675,734],
+              label: "Europe",
+              borderColor: "#3cba9f",
+              fill: false
+            }, { 
+              data: [40,20,10,16,24,38,74,167,508,784],
+              label: "Latin America",
+              borderColor: "#e8c3b9",
+              fill: false
+            }, { 
+              data: [6,3,2,2,7,26,82,172,312,433],
+              label: "North America",
+              borderColor: "#c45850",
+              fill: false
+            }*/
+          ]
+        },
+        options: {
+          title: {
+            display: true,
+            text: 'Espoo and Helsinki region (in millions)'
+          }
+        }
+      });</script>
+
+
+
+      <script>
+        new Chart(document.getElementById("line-chart1"), {
+        type: 'line',
+        data: {
+          labels: [1500,1600,1700,1750,1800,1850,1900,1950,1999,2050],
+          datasets: [{ 
+              data: [86,114,106,106,107,111,133,221,783,2478],
+              label: "Helsinki",
+              borderColor: "#3e95cd",
+              fill: false
+            }, { 
+              data: [282,350,411,502,635,809,947,1402,3700,5267],
+              label: "Espoo",
+              borderColor: "#8e5ea2",
+              fill: false
+            }/*, { 
+              data: [168,170,178,190,203,276,408,547,675,734],
+              label: "Europe",
+              borderColor: "#3cba9f",
+              fill: false
+            }, { 
+              data: [40,20,10,16,24,38,74,167,508,784],
+              label: "Latin America",
+              borderColor: "#e8c3b9",
+              fill: false
+            }, { 
+              data: [6,3,2,2,7,26,82,172,312,433],
+              label: "North America",
+              borderColor: "#c45850",
+              fill: false
+            }*/
+          ]
+        },
+        options: {
+          title: {
+            display: true,
+            text: 'Espoo and Helsinki region (in millions)'
+          }
+        }
+      });</script>
+
     </body>
 
 </html>

@@ -50,7 +50,9 @@ function generateMap(apiPath, containerId) {
         var mapContainer = document.getElementById(containerId);
 
         // Set container height
-        mapContainer.style.height = '100%';
+        mapContainer.style.height = '60%';
+        mapContainer.style.width = '100%';
+        // /mapContainer.float.
 
         function initMap() {
 
@@ -292,11 +294,13 @@ function generateMap(apiPath, containerId) {
             maxIntensity: 30
         });
 
+        /*var rate = 1;
+        console.log(rate);
         var gradient = [
             'rgba('+Math.round(255*rate)+', '+Math.round(255*(1-rate))+', 0, 0)',
             'rgba('+Math.round(255*rate)+', '+Math.round(255*(1-rate))+', 0, 1)'];
 
-        heatmap.set('gradient', gradient);        
+        heatmap.set('gradient', gradient);        */
     }
 
     /**
